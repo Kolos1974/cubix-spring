@@ -10,12 +10,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import hu.cubix.hr.kolos.model.Employee;
 import hu.cubix.hr.kolos.service.EmployeeService;
+import hu.cubix.hr.kolos.service.SalaryService;
+import hu.cubix.hr.kolos.service.SmartEmployeeService;
 
 @SpringBootApplication
 public class HrApplication implements CommandLineRunner {
 
 	@Autowired
 	EmployeeService employeeService;
+	@Autowired
+	SalaryService salaryService;	
 	
 	
 	public static void main(String[] args) {
@@ -33,6 +37,17 @@ public class HrApplication implements CommandLineRunner {
 		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "Office worker", 200000, LocalDateTime.of(2021,Month.JULY,10,10,10))));
 		// 0
 		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "Project Manager", 400000, LocalDateTime.of(2022,Month.FEBRUARY,10,10,10))));
+		
+		///////////
+		Employee emp1 = new Employee((long) 1, "Marketing", 500000, LocalDateTime.of(2012,Month.FEBRUARY,10,10,10));
+		Employee emp2 = new Employee((long) 1, "HR", 300000, LocalDateTime.of(2018,Month.FEBRUARY,10,10,10));
+		Employee emp3 = new Employee((long) 1, "Office worker", 200000, LocalDateTime.of(2021,Month.JULY,10,10,10));
+		Employee emp4 = new Employee((long) 1, "Project Manager", 400000, LocalDateTime.of(2022,Month.FEBRUARY,10,10,10));
+		
+		// salaryService(SmartEmployeeService().getPayRaisePercent(emp1));
+		
+		
+		
 	}
 
 }

@@ -1,18 +1,18 @@
 package hu.cubix.hr.kolos.service;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import hu.cubix.hr.kolos.model.Employee;
 
+@Service
 public class SalaryService {
 
-	//@Bean
 	private EmployeeService employeeService;
-	private Employee employee;
 
-	public SalaryService(Employee employee) {
+	public SalaryService(EmployeeService employeeService) {
 		// super();
-		this.employee = employee;
+		this.employeeService = employeeService;
 	}
 	
 
