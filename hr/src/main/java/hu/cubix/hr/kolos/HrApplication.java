@@ -18,6 +18,7 @@ public class HrApplication implements CommandLineRunner {
 
 	@Autowired
 	EmployeeService employeeService;
+	
 	@Autowired
 	SalaryService salaryService;	
 	
@@ -44,7 +45,28 @@ public class HrApplication implements CommandLineRunner {
 		Employee emp3 = new Employee((long) 1, "Office worker", 200000, LocalDateTime.of(2021,Month.JULY,10,10,10));
 		Employee emp4 = new Employee((long) 1, "Project Manager", 400000, LocalDateTime.of(2022,Month.FEBRUARY,10,10,10));
 		
-		// salaryService(SmartEmployeeService().getPayRaisePercent(emp1));
+		
+		
+		System.out.println("Origin salary:");
+		System.out.println(emp1.getSalary());		
+		System.out.println(emp2.getSalary());		
+		System.out.println(emp3.getSalary());		
+		System.out.println(emp4.getSalary());		
+		
+		salaryService.setNewSalary(emp1);
+		salaryService.setNewSalary(emp2);
+		salaryService.setNewSalary(emp3);
+		salaryService.setNewSalary(emp4);
+		
+		System.out.println("Changed salary:");
+		System.out.println(emp1.getSalary());		
+		System.out.println(emp2.getSalary());		
+		System.out.println(emp3.getSalary());		
+		System.out.println(emp4.getSalary());		
+		
+		
+		
+		
 		
 		
 		

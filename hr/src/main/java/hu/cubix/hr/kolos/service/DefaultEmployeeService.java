@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import hu.cubix.hr.kolos.model.Employee;
 
-// @Service
+ //@Service
 public class DefaultEmployeeService implements EmployeeService {
 
 	@Override
