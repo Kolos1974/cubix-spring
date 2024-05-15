@@ -1,0 +1,17 @@
+spring:
+    profiles:
+        active: smart
+        
+hr:
+    raisesalary:
+        defaultvalues:
+            percent: 5
+        smartvalues:
+            interval1year: 10
+            interval1percent: 10
+            interval2year: 5
+            interval2percent: 5
+            interval3year: 2.5
+            interval3percent: 2
+            interval4year: 0
+            interval4percent: 0
