@@ -15,3 +15,9 @@ hr:
             interval3percent: 2
             interval4year: 0
             interval4percent: 0
+            limits:
+                1: 1
+                2.5: 2
+                5: 5
+                10: 10
+                7.5: 8

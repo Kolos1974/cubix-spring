@@ -4,38 +4,40 @@ import java.time.LocalDateTime;
 
 public class Employee {
 
-	private Long id;
-	private String job;
+	private Long employeeId;
+	private String jobTitle;
 	private Integer salary;
-	private LocalDateTime startedWorking;
+	private LocalDateTime dateOfStartWork;
 	
-	
-	public Employee(Long id, String job, Integer salary, LocalDateTime startedWorking) {
+	public Employee() {
+	}
+		
+	public Employee(Long employeeId, String jobTitle, Integer salary, LocalDateTime dateOfStartWork) {
 		super();
-		this.id = id;
-		this.job = job;
+		this.employeeId = employeeId;
+		this.jobTitle = jobTitle;
 		this.salary = salary;
-		this.startedWorking = startedWorking;
+		this.dateOfStartWork = dateOfStartWork;
 	}
 
 
-	public Long getId() {
-		return id;
+	public Long getEmployeeId() {
+		return employeeId;
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
 	}
 
 
-	public String getJob() {
-		return job;
+	public String getJobTitle() {
+		return jobTitle;
 	}
 
 
-	public void setJob(String job) {
-		this.job = job;
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 
 
@@ -49,13 +51,13 @@ public class Employee {
 	}
 
 
-	public LocalDateTime getStartedWorking() {
-		return startedWorking;
+	public LocalDateTime getDateOfStartWork() {
+		return dateOfStartWork;
 	}
 
 
-	public void setStartedWorking(LocalDateTime startedWorking) {
-		this.startedWorking = startedWorking;
+	public void setDateOfStartWork(LocalDateTime dateOfStartWork) {
+		this.dateOfStartWork = dateOfStartWork;
 	}
 	
 	

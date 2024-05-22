@@ -1,5 +1,7 @@
 package hu.cubix.hr.kolos.config;
 
+import java.util.TreeMap;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -57,20 +59,25 @@ public class HrConfigurationProperties {
 		
 		public class SmartValues {
 
-			private float interval1year;
+			private Double interval1year;
 			private int interval1percent;
-			private float interval2year;
+			
+			private Double interval2year;
 			private int interval2percent;
-			private float interval3year;
+			
+			private Double interval3year;
 			private int interval3percent;
-			private float interval4year;
+			
+			private Double interval4year;
 			private int interval4percent;
 			
 			
-			public float getInterval1year() {
+			private TreeMap<Double, Integer> limits;
+			
+			public Double getInterval1year() {
 				return interval1year;
 			}
-			public void setInterval1year(float interval1year) {
+			public void setInterval1year(Double interval1year) {
 				this.interval1year = interval1year;
 			}
 			public int getInterval1percent() {
@@ -79,10 +86,10 @@ public class HrConfigurationProperties {
 			public void setInterval1percent(int interval1percent) {
 				this.interval1percent = interval1percent;
 			}
-			public float getInterval2year() {
+			public Double getInterval2year() {
 				return interval2year;
 			}
-			public void setInterval2year(float interval2year) {
+			public void setInterval2year(Double interval2year) {
 				this.interval2year = interval2year;
 			}
 			public int getInterval2percent() {
@@ -91,10 +98,10 @@ public class HrConfigurationProperties {
 			public void setInterval2percent(int interval2percent) {
 				this.interval2percent = interval2percent;
 			}
-			public float getInterval3year() {
+			public Double getInterval3year() {
 				return interval3year;
 			}
-			public void setInterval3year(float interval3year) {
+			public void setInterval3year(Double interval3year) {
 				this.interval3year = interval3year;
 			}
 			public int getInterval3percent() {
@@ -103,10 +110,10 @@ public class HrConfigurationProperties {
 			public void setInterval3percent(int interval3percent) {
 				this.interval3percent = interval3percent;
 			}
-			public float getInterval4year() {
+			public Double getInterval4year() {
 				return interval4year;
 			}
-			public void setInterval4year(float interval4year) {
+			public void setInterval4year(Double interval4year) {
 				this.interval4year = interval4year;
 			}
 			public int getInterval4percent() {
@@ -116,6 +123,14 @@ public class HrConfigurationProperties {
 				this.interval4percent = interval4percent;
 			}
 			
+			
+			public TreeMap<Double, Integer> getLimits() {
+				return limits;
+			}
+
+			public void setLimits(TreeMap<Double, Integer> limits) {
+				this.limits = limits;
+			}
 			
 		}
 		
