@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.cubix.hr.kolos.config.HrConfigurationProperties;
+import hu.cubix.hr.kolos.config.HrConfigurationProperties.RaiseSalary.SmartValues;
 import hu.cubix.hr.kolos.model.Employee;
 
 @Service
@@ -31,16 +32,27 @@ public class SmartEmployeeService implements EmployeeService {
 		return 0;
 		*/
 		
-		if (LocalDate.now().getYear()-employee.getStartedWorking().getYear()>=config.getRaiseSalary().getSmartValues().getInterval1year()) {
-			return config.getRaiseSalary().getSmartValues().getInterval1percent();
+		int yearsWorked = LocalDate.now().getYear()-employee.getStartedWorking().getYear();
+		
+		SmartValues smartValues = config.getRaiseSalary().getSmartValues();
+		
+		
+		if (yearsWorked>=config.getRaiseSalary().getSmartValues().getInterval1year()) {
+			// return config.getRaiseSalary().getSmartValues().getInterval1percent();
+			return smartValues.getInterval1percent();
 		}
-		else if (LocalDate.now().getYear()-employee.getStartedWorking().getYear()>=config.getRaiseSalary().getSmartValues().getInterval2year()) {
-			return config.getRaiseSalary().getSmartValues().getInterval2percent();
+		
+		if (yearsWorked>=config.getRaiseSalary().getSmartValues().getInterval2year()) {
+			//return config.getRaiseSalary().getSmartValues().getInterval2percent();
+			return smartValues.getInterval2percent();
 		}
-		else if ((float)(LocalDate.now().getYear()-employee.getStartedWorking().getYear())>=config.getRaiseSalary().getSmartValues().getInterval3year()) {
-			return config.getRaiseSalary().getSmartValues().getInterval3percent();
+		
+		if ((float)(LocalDate.now().getYear()-employee.getStartedWorking().getYear())>=config.getRaiseSalary().getSmartValues().getInterval3year()) {
+			// return config.getRaiseSalary().getSmartValues().getInterval3percent();
+			return smartValues.getInterval3percent();
 		}
-		else return config.getRaiseSalary().getSmartValues().getInterval4percent();
+		
+		return smartValues.getInterval4percent();
 		
 		 
 	}

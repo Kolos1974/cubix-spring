@@ -20,12 +20,13 @@ public class EmployeeTLController {
 		airports.add(new AirportDto(1, "Budapest ferenc Liszt International", "BUD"));
 	}
 	*/
-	
+	/*
 	@GetMapping("/")
 	public String home() {
 		System.out.println("elindult");
 		return "index";
 	}
+	*/
 	
 	
 	
