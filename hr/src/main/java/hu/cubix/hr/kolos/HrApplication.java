@@ -31,19 +31,19 @@ public class HrApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("Hr application:");
 		//10
-		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "Marketing", 500000, LocalDateTime.of(2012,Month.FEBRUARY,10,10,10))));
+		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "Csaba", "Marketing", 500000, LocalDateTime.of(2012,Month.FEBRUARY,10,10,10))));
 		// 5
-		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "HR", 300000, LocalDateTime.of(2018,Month.FEBRUARY,10,10,10))));
+		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "Géza", "HR", 300000, LocalDateTime.of(2018,Month.FEBRUARY,10,10,10))));
 		// 2
-		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "Office worker", 200000, LocalDateTime.of(2021,Month.JULY,10,10,10))));
+		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "Péter", "Office worker", 200000, LocalDateTime.of(2021,Month.JULY,10,10,10))));
 		// 0
-		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "Project Manager", 400000, LocalDateTime.of(2022,Month.FEBRUARY,10,10,10))));
+		System.out.println(employeeService.getPayRaisePercent(new Employee((long) 1, "Pál", "Project Manager", 400000, LocalDateTime.of(2022,Month.FEBRUARY,10,10,10))));
 		
 		///////////
-		Employee emp1 = new Employee((long) 1, "Marketing", 500000, LocalDateTime.of(2012,Month.FEBRUARY,10,10,10));
-		Employee emp2 = new Employee((long) 1, "HR", 300000, LocalDateTime.of(2018,Month.FEBRUARY,10,10,10));
-		Employee emp3 = new Employee((long) 1, "Office worker", 200000, LocalDateTime.of(2021,Month.JULY,10,10,10));
-		Employee emp4 = new Employee((long) 1, "Project Manager", 400000, LocalDateTime.of(2022,Month.FEBRUARY,10,10,10));
+		Employee emp1 = new Employee((long) 1, "Csaba", "Marketing", 500000, LocalDateTime.of(2012,Month.FEBRUARY,10,10,10));
+		Employee emp2 = new Employee((long) 1, "Géza", "HR", 300000, LocalDateTime.of(2018,Month.FEBRUARY,10,10,10));
+		Employee emp3 = new Employee((long) 1, "Péter", "Office worker", 200000, LocalDateTime.of(2021,Month.JULY,10,10,10));
+		Employee emp4 = new Employee((long) 1, "Pál", "Project Manager", 400000, LocalDateTime.of(2022,Month.FEBRUARY,10,10,10));
 		
 		
 		
