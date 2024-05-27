@@ -21,11 +21,11 @@
 
 		<tbody>
 			<tr th:each="employee : ${employees}">
-				<td th:text="${employee.Id}">Id</td>
+				<td th:text="${employee.employeeId}">Id</td>
 				<td th:text="${employee.name}">Name</td>
-				<td th:text="${employee.title}">Title</td>
+				<td th:text="${employee.jobTitle}">Title</td>
 				<td th:text="${employee.salary}">Salary</td>
-<!--				<td th:text="${employee.dateOfStartWork}">dateOfStartWork</td>-->
+				<td th:text="${employee.dateOfStartWork}">dateOfStartWork</td>
 			</tr>
 		</tbody>
 	</table>

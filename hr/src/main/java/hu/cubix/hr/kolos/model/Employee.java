@@ -7,17 +7,23 @@ public class Employee {
 	private Long employeeId;
 	private String name;
 	private String jobTitle;
-	private Integer salary;
+	private int salary;
 	private LocalDateTime dateOfStartWork;
 	
 	public Employee() {
 	}
 		
-	public Employee(Long employeeId, String name, String jobTitle, Integer salary, LocalDateTime dateOfStartWork) {
-		super();
+	public Employee(Long employeeId, String name, String jobTitle, int salary, LocalDateTime dateOfStartWork) {
+		//super();
 		this.employeeId = employeeId;
 		this.name= name;
 		this.jobTitle = jobTitle;
+		this.salary = salary;
+		this.dateOfStartWork = dateOfStartWork;
+	}
+	
+	
+	public Employee(int salary, LocalDateTime dateOfStartWork) {
 		this.salary = salary;
 		this.dateOfStartWork = dateOfStartWork;
 	}
@@ -51,12 +57,12 @@ public class Employee {
 	}
 
 
-	public Integer getSalary() {
+	public int getSalary() {
 		return salary;
 	}
 
 
-	public void setSalary(Integer salary) {
+	public void setSalary(int salary) {
 		this.salary = salary;
 	}
 

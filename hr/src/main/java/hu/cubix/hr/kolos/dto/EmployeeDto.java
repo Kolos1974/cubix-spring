@@ -57,7 +57,7 @@ public class EmployeeDto {
 		return dateOfStartWork;
 	}
 
-	public void setDateOfStartWork(LocalDateTime dateOfStartWork) {
+	public void setdateOfStartWork(LocalDateTime dateOfStartWork) {
 		this.dateOfStartWork = dateOfStartWork;
 	}
 

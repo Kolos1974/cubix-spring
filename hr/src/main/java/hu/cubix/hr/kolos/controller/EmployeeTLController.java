@@ -9,17 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import hu.cubix.hr.kolos.dto.EmployeeDto;
 import hu.cubix.hr.kolos.model.Employee;
 
 @Controller
 public class EmployeeTLController {
 
-	private List<EmployeeDto> allEmployees = new ArrayList<>();
+	//private List<EmployeeDto> allEmployees = new ArrayList<>();
+	private List<Employee> allEmployees = new ArrayList<>();
 
 	{
 		allEmployees
-				.add(new EmployeeDto(1L, "Kis Gábor", "osztályvezető", 100000, LocalDateTime.of(2012, 1, 1, 8, 0, 0)));
+				.add(new Employee(1L, "Kis Gábor", "osztályvezető", 100000, LocalDateTime.of(2012, 1, 1, 8, 0, 0)));
 	}
 
 	
@@ -48,7 +48,8 @@ public class EmployeeTLController {
 	}
 
 	@PostMapping("/employees")
-	public String addEmployee(EmployeeDto employee) {
+	//public String addEmployee(EmployeeDto employee) {
+	public String addEmployee(Employee employee) {
 		allEmployees.add(employee);
 		return "redirect:employees";
 	}
