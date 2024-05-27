@@ -30,7 +30,6 @@ public class AirportController {
 		airports.put(1L, new AirportDto(1, "Budapest ferenc Liszt International", "BUD"));
 	}
 	
-	
 	@GetMapping
 	public List<AirportDto> findAll(){
 //		return airports; 

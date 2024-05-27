@@ -53,17 +53,17 @@ public class EmployeeDto {
 		this.salary = salary;
 	}
 
-	public LocalDateTime getEntryDate() {
+	public LocalDateTime getdateOfStartWork() {
 		return dateOfStartWork;
 	}
 
-	public void setEntryDate(LocalDateTime entryDate) {
-		this.dateOfStartWork = entryDate;
+	public void setDateOfStartWork(LocalDateTime dateOfStartWork) {
+		this.dateOfStartWork = dateOfStartWork;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", title=" + title + ", salary=" + salary + ", entryDate="
+		return "Employee [id=" + id + ", name=" + name + ", title=" + title + ", salary=" + salary + ", dateOfStartWork="
 				+ dateOfStartWork + "]";
 	}
 
