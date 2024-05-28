@@ -1,4 +1,4 @@
-package hu.cubix.hr.kolos.controller;
+package hu.cubix.hr.kolos.web;
 
 import java.util.ArrayList;
 import java.util.HashMap;

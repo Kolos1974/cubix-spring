@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Modify Employee</title>
+</head>
+<body>
+   <h1>Modify Employees</h1>
+
+    <form th:action="@{/employees/updateEmployee}" method="post" th:object="${modifiedEmployee}">
+        Id: <span th:text="*{employeeId}"></span><br>
+        <input th:field="*{employeeId}" type="hidden"/> <br/>
+        Name: <input th:field="*{name}"/> <br/>
+        Title: <input th:field="*{jobTitle}"/> <br/>
+        Salary: <input th:field="*{salary}"/> <br/>
+        Start date: <input th:field="*{dateOfStartWork}"/> <br/>
+<!--        <input type="submit" value="Update"/>-->
+<!--        <input type="submit" name="Cancel" value="Cancel"/>-->
+        <button type="submit" value="Update">Update</button>
+        <button type="submit" value="Cancel">Cancel</button>
+    </form>
+</body>
+</html>
