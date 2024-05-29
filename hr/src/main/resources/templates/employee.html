@@ -9,7 +9,7 @@
 
     <form th:action="@{/employees/updateEmployee}" method="post" th:object="${modifiedEmployee}">
         Id: <span th:text="*{employeeId}"></span><br>
-        <input th:field="*{employeeId}" type="hidden"/> <br/>
+        <input th:field="*{employeeId}" type="hidden"/>
         Name: <input th:field="*{name}"/> <br/>
         Title: <input th:field="*{jobTitle}"/> <br/>
         Salary: <input th:field="*{salary}"/> <br/>

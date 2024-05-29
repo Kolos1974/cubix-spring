@@ -1,21 +1,30 @@
 package hu.cubix.hr.kolos.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 public class CompanyDto {
 	
+	@JsonView(Views.BaseData.class)
 	private long id;
+	@JsonView(Views.BaseData.class)
 	private String regNumber;
+	@JsonView(Views.BaseData.class)
 	private String name;
+	@JsonView(Views.BaseData.class)
 	private String address;
 		
-	private EmployeeDto employeeDto;
+	private List<EmployeeDto> employees = new ArrayList<>();
 
-	public CompanyDto(long id, String regNumber, String name, String address, EmployeeDto employeeDto) {
+	public CompanyDto(long id, String regNumber, String name, String address, List<EmployeeDto> employees) {
 		super();
 		this.id = id;
 		this.regNumber = regNumber;
 		this.name = name;
 		this.address = address;
-		this.employeeDto = employeeDto;
+		this.employees = employees;
 	}
 
 	public long getId() {
@@ -50,12 +59,12 @@ public class CompanyDto {
 		this.address = address;
 	}
 
-	public EmployeeDto getEmployeeDto() {
-		return employeeDto;
+	public List<EmployeeDto> getEmployees() {
+		return employees;
 	}
 
-	public void setEmployeeDto(EmployeeDto employeeDto) {
-		this.employeeDto = employeeDto;
+	public void setEmployees(List<EmployeeDto> employees) {
+		this.employees = employees;
 	}
 	
 	

@@ -78,16 +78,20 @@ public class EmployeeTLController {
         for (int i = 0; i < allEmployees.size(); i++) {
             if(allEmployees.get(i).getEmployeeId()== employee.getEmployeeId()){
                 allEmployees.set(i,employee);
+                break;
             }
         }
         return "redirect:/employees";
     }
 
     @GetMapping("/employees/delete/{id}")
-    public String deleteEmployees(@PathVariable("id") long id){
-        List<Employee> result=
+    public String deleteEmployee(@PathVariable("id") long id){
+        /*
+    	List<Employee> result=
         allEmployees.stream().filter(employee->employee.getEmployeeId()==id).toList();
         allEmployees.removeAll(result);
+        */
+    	allEmployees.removeIf(emp -> emp.getEmployeeId() == id);
         return "redirect:/employees";
     }
     
