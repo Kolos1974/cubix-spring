@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import hu.cubix.airport.dto.AirportDto;
+import hu.cubix.airport.service.NonUniqueIataException;
 
 @RestController
 @RequestMapping("/api/airports")
@@ -36,18 +39,29 @@ public class AirportController {
 		return new ArrayList<>(airports.values()); 
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<AirportDto> findById(@PathVariable long id) {
+	@GetMapping("/old/{id}")
+	public ResponseEntity<AirportDto> findById_old(@PathVariable long id) {
 		AirportDto airportDto = airports.get(id);
 		if(airportDto == null) {
 			return ResponseEntity.notFound().build(); 
 		}
-		
 		return ResponseEntity.ok(airportDto);
 	}
 	
+	@GetMapping("/{id}")
+	public AirportDto findById(@PathVariable long id) {
+		AirportDto airportDto = airports.get(id);
+		if(airportDto == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);  
+		}
+		return airportDto;
+	}
 	
-
+	
+	
+	
+	
+/* Old version
 	@PostMapping
 //	public AirportDto create(@RequestBody AirportDto airport) {
 	public ResponseEntity<AirportDto> create(@RequestBody AirportDto airport) {
@@ -59,10 +73,25 @@ public class AirportController {
 //		return airport;
 		return ResponseEntity.ok(airport);
 	}
+*/
 	
+	@PostMapping
+	public AirportDto create(@RequestBody AirportDto airport) {
+		if (airports.containsKey(airport.getId()))
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);  
+		
+		if (airports.values().stream().anyMatch(a -> a.getIata().equals(airport.getIata())))
+			throw new NonUniqueIataException();
+		
+		airports.put(airport.getId(), airport);
+		return airport;
+	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<AirportDto> update(@PathVariable long id, @RequestBody AirportDto airport) {
+	
+	
+	
+	@PutMapping("/old/{id}")
+	public ResponseEntity<AirportDto> update_old(@PathVariable long id, @RequestBody AirportDto airport) {
 		airport.setId(id);
 		if (!airports.containsKey(id))
 			return ResponseEntity.notFound().build(); 
@@ -70,6 +99,20 @@ public class AirportController {
 		airports.put(id, airport);
 		return ResponseEntity.ok(airport);
 	}
+
+	
+	@PutMapping("/{id}")
+	public AirportDto update(@PathVariable long id, @RequestBody AirportDto airport) {
+		airport.setId(id);
+		if (!airports.containsKey(id))
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);  
+		
+		airports.put(id, airport);
+		return airport;
+	}
+	
+	
+	
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id) {
