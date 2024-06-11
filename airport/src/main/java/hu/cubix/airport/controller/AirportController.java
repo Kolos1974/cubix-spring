@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import hu.cubix.airport.dto.AirportDto;
 import hu.cubix.airport.service.NonUniqueIataException;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/airports")
@@ -76,7 +78,7 @@ public class AirportController {
 */
 	
 	@PostMapping
-	public AirportDto create(@RequestBody AirportDto airport) {
+	public AirportDto create(@RequestBody @Valid AirportDto airport) {
 		if (airports.containsKey(airport.getId()))
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);  
 		
@@ -102,7 +104,11 @@ public class AirportController {
 
 	
 	@PutMapping("/{id}")
-	public AirportDto update(@PathVariable long id, @RequestBody AirportDto airport) {
+	public AirportDto update(@PathVariable long id, @RequestBody @Valid AirportDto airport  /*, BindingResult bindingResult*/ ) {
+		
+		
+		
+		
 		airport.setId(id);
 		if (!airports.containsKey(id))
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);  
