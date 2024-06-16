@@ -10,6 +10,15 @@ public class Airport {
 	private String iata;
 	
 	
+	public Airport() {
+	}
+	
+	public Airport(long id, String name, String iata) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.iata = iata;
+	}
 	public long getId() {
 		return id;
 	}

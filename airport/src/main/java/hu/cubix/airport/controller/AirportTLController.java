@@ -9,28 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import hu.cubix.airport.dto.AirportDto;
+import hu.cubix.airport.model.Airport;
 
 @Controller
 public class AirportTLController {
 	
-	private List<AirportDto> airports = new ArrayList<>();
+	private List<Airport> airports = new ArrayList<>();
 
 	// Inicializáló blokk, Java alapszolgáltatás
 	{
-		airports.add(new AirportDto(1, "Budapest ferenc Liszt International", "BUD"));
+		airports.add(new Airport(1, "Budapest ferenc Liszt International", "BUD"));
 	}
 	
 
 	@GetMapping("/")
 	public String home(Map<String, Object> model) {
 		model.put("airports", airports);
-		model.put("newAirport", new AirportDto());
+		model.put("newAirport", new Airport());
 		return "index";
 	}
 	
 	
 	@PostMapping("/airport")
-	public String createAirport(AirportDto airport) {
+	public String createAirport(Airport airport) {
 		airports.add(airport);
 		
 		//model.put("airports", airports);
