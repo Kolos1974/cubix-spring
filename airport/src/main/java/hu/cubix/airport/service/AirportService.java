@@ -50,11 +50,12 @@ public class AirportService {
 			throw new NonUniqueIataException();
 	}	
 	
-	
+	/*
 	private void throwIfNonUniqueIata(AirportDto airport) {
 		if (airports.values().stream().anyMatch(a -> a.getIata().equals(airport.getIata())))
 			throw new NonUniqueIataException();
-	}	
+	}
+	*/
 	
 	
 	public List<Airport> findAll(){
