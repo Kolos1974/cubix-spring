@@ -1,8 +1,12 @@
 package hu.cubix.airport.model;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.persistence.Entity;
+//import javax.persistence.Entity;
 
+
+
+
+@Entity
 public class Airport {
 
 	private long id;
