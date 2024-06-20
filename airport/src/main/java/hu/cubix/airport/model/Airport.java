@@ -1,7 +1,20 @@
 package hu.cubix.airport.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+
 //import javax.persistence.Entity;
+
+@NamedQuery(
+		name = "Airport.countByIata",
+		query = "SELECT COUNT(a) FROM Airport a WHERE a.iata = :iata"
+)
+@NamedQuery(
+		name = "Airport.countByIataAndIdNot",
+		query = "SELECT COUNT(a) FROM Airport a WHERE a.iata = :iata AND a.id != :id"
+)
 
 
 
@@ -9,6 +22,8 @@ import jakarta.persistence.Entity;
 @Entity
 public class Airport {
 
+	@Id
+	@GeneratedValue
 	private long id;
 	private String name;
 	private String iata;

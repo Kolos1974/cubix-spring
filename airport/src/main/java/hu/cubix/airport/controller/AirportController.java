@@ -135,7 +135,8 @@ public class AirportController {
 			@RequestBody @Valid AirportDto airportDto /* , BindingResult bindingResult */ ) {
 
 		// airportDto.setId(id);
-		airportDto = new AirportDto(airportDto.id(), airportDto.name(), airportDto.iata());
+		/// airportDto = new AirportDto(airportDto.id(), airportDto.name(), airportDto.iata());
+		airportDto = new AirportDto(id, airportDto.name(), airportDto.iata());
 		Airport airport = airportMapper.dtoToAirport(airportDto);
 		Airport updatedAirport = airportService.update(airport);
 		
