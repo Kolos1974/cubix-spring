@@ -4,17 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
+import jakarta.validation.constraints.Size;
 
 //import javax.persistence.Entity;
 
-@NamedQuery(
-		name = "Airport.countByIata",
-		query = "SELECT COUNT(a) FROM Airport a WHERE a.iata = :iata"
-)
-@NamedQuery(
-		name = "Airport.countByIataAndIdNot",
-		query = "SELECT COUNT(a) FROM Airport a WHERE a.iata = :iata AND a.id != :id"
-)
+//@NamedQuery(
+//		name = "Airport.countByIata",
+//		query = "SELECT COUNT(a) FROM Airport a WHERE a.iata = :iata"
+//)
+//@NamedQuery(
+//		name = "Airport.countByIataAndIdNot",
+//		query = "SELECT COUNT(a) FROM Airport a WHERE a.iata = :iata AND a.id != :id"
+//)
 
 
 
@@ -26,6 +27,8 @@ public class Airport {
 	@GeneratedValue
 	private long id;
 	private String name;
+
+	@Size(min=2, max = 5)
 	private String iata;
 	
 	
