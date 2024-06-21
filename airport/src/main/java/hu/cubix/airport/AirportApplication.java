@@ -29,7 +29,7 @@ public class AirportApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		System.out.println(priceService.getFinalPrice(100));
 		System.out.println(priceService.getFinalPrice(2000));
-		airportService.createFlight(1, 2, "ABC123", LocalDateTime.now());
+		// airportService.createFlight(1, 2, "ABC123", LocalDateTime.now());
 		
 		
 	}
