@@ -7,10 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
+
+import static hu.cubix.airport.service.FlightSpecifications.*; 
 
 import hu.cubix.airport.dto.AirportDto;
 import hu.cubix.airport.model.Airport;
@@ -136,6 +140,33 @@ public class AirportService {
 		return flightRepository.save(flight);
 		
 	}
+	
+	public List<Flight> findFlightsByExample(Flight flight){
+		long id = flight.getId();
+		String flightNumber = flight.getFlightNumber();
+		long takeoffId = 0;
+		Airport takeoff = flight.getTakeoff();
+		if(takeoff != null)
+			takeoffId = takeoff.getId();
+		
+		Specification<Flight> specs = Specification.where(null);
+		
+		if(id >0) {
+			specs = specs.and(FlightSpecifications.hasId(id));
+		}
+		
+		if(StringUtils.hasLength(flightNumber)) {
+			specs = specs.and(FlightSpecifications.flightNumberStartsWith(flightNumber));
+			
+		}
+		
+		if(takeoffId >0) {
+			specs = specs.and(flightHasTakeoffId(takeoffId));
+		}
+		
+		return flightRepository.findAll(specs);
+	}
+	
 	
 	
 }
