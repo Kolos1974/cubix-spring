@@ -23,6 +23,7 @@ import hu.cubix.airport.dto.AirportDto;
 import hu.cubix.airport.mapper.AirportMapper;
 import hu.cubix.airport.model.Airport;
 import hu.cubix.airport.service.AirportService;
+import hu.cubix.airport.service.LogEntryService;
 import hu.cubix.airport.service.NonUniqueIataException;
 import jakarta.validation.Valid;
 
@@ -35,6 +36,9 @@ public class AirportController {
 
 	@Autowired
 	private AirportMapper airportMapper;
+	
+	// @Autowired
+	// private LogEntryService logEntryService;
 
 	/*
 	 * // private List<AirportDto> airports = new ArrayList<>(); private Map<Long,
@@ -139,6 +143,8 @@ public class AirportController {
 		airportDto = new AirportDto(id, airportDto.name(), airportDto.iata());
 		Airport airport = airportMapper.dtoToAirport(airportDto);
 		Airport updatedAirport = airportService.update(airport);
+		// logEntryService.logAirportChange(updatedAirport);
+		
 		
 //		if (!airports.containsKey(id))
 		if (updatedAirport == null)
