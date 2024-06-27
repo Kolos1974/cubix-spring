@@ -65,11 +65,6 @@ public class HrApplication implements CommandLineRunner {
 		System.out.println(emp4.getSalary());		
 		
 		
-		
-		
-		
-		
-		
 	}
 
 }

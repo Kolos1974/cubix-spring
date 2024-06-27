@@ -43,13 +43,15 @@ public class CompanyController {
 	@GetMapping
 	public List<CompanyDto> findAll(@RequestParam Optional<Boolean> full){
 		
-		if(full.orElse(false)) {
-			return new ArrayList<>(companies.values());
-		} else {
-			return companies.values().stream()
-			.map(this::createCompanyWithoutEmployees)
-			.toList();
-		}
+		return null;
+		
+//		if(full.orElse(false)) {
+//			return new ArrayList<>(companies.values());
+//		} else {
+//			return companies.values().stream()
+//			.map(this::createCompanyWithoutEmployees)
+//			.toList();
+//		}
 	}
 	
 
@@ -67,23 +69,26 @@ public class CompanyController {
 	
 	
 	
-	private CompanyDto createCompanyWithoutEmployees(CompanyDto c) {
-		return new CompanyDto(c.getId(), c.getRegNumber(), c.getName(), c.getAddress(), null);
-	}
+//	private CompanyDto createCompanyWithoutEmployees(CompanyDto c) {
+//		return new CompanyDto(c.getId(), c.getRegNumber(), c.getName(), c.getAddress(), null);
+//	}
 	
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<CompanyDto> findById(@PathVariable long id, @RequestParam Optional<Boolean> full) {
-		CompanyDto companyDto = companies.get(id);
-		if(companyDto == null) {
-			return ResponseEntity.notFound().build();
-		}
 		
-		return ResponseEntity.ok(
-				full.orElse(false) ? 
-				companyDto
-				: createCompanyWithoutEmployees(companyDto)
-			);
+		return null;
+		
+//		CompanyDto companyDto = companies.get(id);
+//		if(companyDto == null) {
+//			return ResponseEntity.notFound().build();
+//		}
+//		
+//		return ResponseEntity.ok(
+//				full.orElse(false) ? 
+//				companyDto
+//				: createCompanyWithoutEmployees(companyDto)
+//			);
 	}
 	
 	
@@ -103,27 +108,32 @@ public class CompanyController {
 	
 	@PostMapping
 	public ResponseEntity<CompanyDto> create(@RequestBody CompanyDto company) {
-		if(companies.containsKey(company.getId()))
-			return ResponseEntity.badRequest().build();
-			
-		companies.put(company.getId(), company);
-		return ResponseEntity.ok(company);
+		return null;
+		
+//		if(companies.containsKey(company.getId()))
+//			return ResponseEntity.badRequest().build();
+//			
+//		companies.put(company.getId(), company);
+//		return ResponseEntity.ok(company);
 	}
 	
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<CompanyDto> update(@PathVariable long id, @RequestBody CompanyDto company) {
-		company.setId(id);
-		if(!companies.containsKey(id))
-			return ResponseEntity.notFound().build();
+		return null;
 		
-		companies.put(id, company);
-		return ResponseEntity.ok(company);
+		
+//		company.setId(id);
+//		if(!companies.containsKey(id))
+//			return ResponseEntity.notFound().build();
+//		
+//		companies.put(id, company);
+//		return ResponseEntity.ok(company);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id) {
-		companies.remove(id);
+//		companies.remove(id);
 	}
 	
 	@PostMapping("/{id}/employees_old")
@@ -139,35 +149,41 @@ public class CompanyController {
 	
 	@PostMapping("/{id}/employees")
 	public CompanyDto addNewEmployee(@PathVariable long id, @RequestBody EmployeeDto employeeDto){
-		CompanyDto companyDto = getCompanyByIdOrThrow(id);
+		return null;
 		
-		companyDto.getEmployees().add(employeeDto);
-		return companyDto;
+//		CompanyDto companyDto = getCompanyByIdOrThrow(id);
+//		
+//		companyDto.getEmployees().add(employeeDto);
+//		return companyDto;
 	}
 	
 	
 	@DeleteMapping("/{id}/employees/{employeeId}")
 	public CompanyDto deleteEmployee(@PathVariable long id, @PathVariable long employeeId){
-		CompanyDto companyDto = getCompanyByIdOrThrow(id);
-		companyDto.getEmployees().removeIf(e -> e.getId() == employeeId);
-		return companyDto;
+		return null;
+		
+//		CompanyDto companyDto = getCompanyByIdOrThrow(id);
+//		companyDto.getEmployees().removeIf(e -> e.getId() == employeeId);
+//		return companyDto;
 	}
 	
 	
 	@PutMapping("/{id}/employees")
 	public CompanyDto replaceEmployees(@PathVariable long id, @RequestBody List<EmployeeDto> newEmployees){
-		CompanyDto companyDto = getCompanyByIdOrThrow(id);
-		companyDto.setEmployees(newEmployees);
-		return companyDto;
+		return null;
+		
+//		CompanyDto companyDto = getCompanyByIdOrThrow(id);
+//		companyDto.setEmployees(newEmployees);
+//		return companyDto;
 	}
 	
 	
-	private CompanyDto getCompanyByIdOrThrow(long id) {
-		CompanyDto companyDto = companies.get(id);
-		if(companyDto == null)
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-		return companyDto;
-	}
+//	private CompanyDto getCompanyByIdOrThrow(long id) {
+//		CompanyDto companyDto = companies.get(id);
+//		if(companyDto == null)
+//			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+//		return companyDto;
+//	}
 	
 	
 	

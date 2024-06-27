@@ -15,7 +15,7 @@ import hu.cubix.hr.kolos.config.HrConfigurationProperties.RaiseSalary.SmartValue
 import hu.cubix.hr.kolos.model.Employee;
 
 @Service
-public class SmartEmployeeService implements EmployeeService {
+public class SmartEmployeeService extends AbstractEmployeeService {
 
 	@Autowired
 	HrConfigurationProperties config;

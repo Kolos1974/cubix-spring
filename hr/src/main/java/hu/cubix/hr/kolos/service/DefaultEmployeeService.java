@@ -7,7 +7,7 @@ import hu.cubix.hr.kolos.config.HrConfigurationProperties;
 import hu.cubix.hr.kolos.model.Employee;
 
  //@Service
-public class DefaultEmployeeService implements EmployeeService {
+public class DefaultEmployeeService extends AbstractEmployeeService {
 
 	@Autowired
 	HrConfigurationProperties config;
