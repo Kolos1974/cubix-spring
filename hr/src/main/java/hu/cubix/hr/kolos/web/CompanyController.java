@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,10 +22,20 @@ import org.springframework.web.server.ResponseStatusException;
 
 import hu.cubix.hr.kolos.dto.CompanyDto;
 import hu.cubix.hr.kolos.dto.EmployeeDto;
+import hu.cubix.hr.kolos.mapper.CompanyMapper;
+import hu.cubix.hr.kolos.model.Company;
+import hu.cubix.hr.kolos.service.CompanyService;
 
 @RestController
 @RequestMapping("/api/companies")
 public class CompanyController {
+	
+	@Autowired
+	private CompanyService companyService;
+	
+	@Autowired
+	private CompanyMapper companyMapper;
+
 	
 	
 	private Map<Long, CompanyDto> companies = new HashMap<>();
@@ -42,9 +53,7 @@ public class CompanyController {
 	//1. megoldás
 	@GetMapping
 	public List<CompanyDto> findAll(@RequestParam Optional<Boolean> full){
-		
-		return null;
-		
+	
 //		if(full.orElse(false)) {
 //			return new ArrayList<>(companies.values());
 //		} else {
@@ -52,6 +61,13 @@ public class CompanyController {
 //			.map(this::createCompanyWithoutEmployees)
 //			.toList();
 //		}
+		
+		List<Company> companies = companyService.findAll();
+		if(full.orElse(false)) {
+			return companyMapper.companiesToDtos(companies);
+		} else {
+			return companyMapper.companiesToSummaryDtos(companies);
+		}
 	}
 	
 
@@ -77,8 +93,6 @@ public class CompanyController {
 	@GetMapping("/{id}")
 	public ResponseEntity<CompanyDto> findById(@PathVariable long id, @RequestParam Optional<Boolean> full) {
 		
-		return null;
-		
 //		CompanyDto companyDto = companies.get(id);
 //		if(companyDto == null) {
 //			return ResponseEntity.notFound().build();
@@ -89,8 +103,15 @@ public class CompanyController {
 //				companyDto
 //				: createCompanyWithoutEmployees(companyDto)
 //			);
+		
+		Company company = companyService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		return ResponseEntity.ok(
+				full.orElse(false) ? 
+				companyMapper.companyToDto(company)
+				: companyMapper.companyToSummaryDto(company)
+			);		
+		
 	}
-	
 	
 	
 	/*
@@ -107,21 +128,23 @@ public class CompanyController {
 	
 	
 	@PostMapping
-	public ResponseEntity<CompanyDto> create(@RequestBody CompanyDto company) {
-		return null;
+//	public ResponseEntity<CompanyDto> create(@RequestBody CompanyDto company) {
+		public CompanyDto create(@RequestBody CompanyDto companyDto) {
 		
 //		if(companies.containsKey(company.getId()))
 //			return ResponseEntity.badRequest().build();
 //			
 //		companies.put(company.getId(), company);
 //		return ResponseEntity.ok(company);
+		
+		return companyMapper.companyToDto(companyService.save(companyMapper.dtoToCompany(companyDto)));
+		
 	}
 	
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<CompanyDto> update(@PathVariable long id, @RequestBody CompanyDto company) {
-		return null;
-		
+//	public ResponseEntity<CompanyDto> update(@PathVariable long id, @RequestBody CompanyDto company) {
+	public CompanyDto update(@PathVariable long id, @RequestBody CompanyDto companyDto) {
 		
 //		company.setId(id);
 //		if(!companies.containsKey(id))
@@ -129,11 +152,21 @@ public class CompanyController {
 //		
 //		companies.put(id, company);
 //		return ResponseEntity.ok(company);
+		
+		companyDto.setId(id);
+		Company updatedCompany = companyService.update(companyMapper.dtoToCompany(companyDto));
+		if (updatedCompany == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+		
+		return companyMapper.companyToDto(updatedCompany);  
 	}
+	
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id) {
 //		companies.remove(id);
+		companyService.delete(id);
 	}
 	
 	@PostMapping("/{id}/employees_old")
@@ -149,32 +182,37 @@ public class CompanyController {
 	
 	@PostMapping("/{id}/employees")
 	public CompanyDto addNewEmployee(@PathVariable long id, @RequestBody EmployeeDto employeeDto){
-		return null;
-		
 //		CompanyDto companyDto = getCompanyByIdOrThrow(id);
 //		
 //		companyDto.getEmployees().add(employeeDto);
 //		return companyDto;
+		
+		Company company = companyService.addEmployee(id, companyMapper.dtoToEmployee(employeeDto));
+		return companyMapper.companyToDto(company);		
 	}
 	
 	
 	@DeleteMapping("/{id}/employees/{employeeId}")
 	public CompanyDto deleteEmployee(@PathVariable long id, @PathVariable long employeeId){
-		return null;
 		
 //		CompanyDto companyDto = getCompanyByIdOrThrow(id);
 //		companyDto.getEmployees().removeIf(e -> e.getId() == employeeId);
 //		return companyDto;
+		
+		Company company = companyService.deleteEmployee(id, employeeId);
+		return companyMapper.companyToDto(company);		
 	}
 	
 	
 	@PutMapping("/{id}/employees")
 	public CompanyDto replaceEmployees(@PathVariable long id, @RequestBody List<EmployeeDto> newEmployees){
-		return null;
 		
 //		CompanyDto companyDto = getCompanyByIdOrThrow(id);
 //		companyDto.setEmployees(newEmployees);
-//		return companyDto;
+//		return companyDto
+
+		Company company = companyService.replaceEmployees(id, companyMapper.dtosToEmployees(newEmployees));
+		return companyMapper.companyToDto(company);
 	}
 	
 	

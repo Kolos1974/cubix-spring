@@ -24,7 +24,9 @@ import org.springframework.web.server.ResponseStatusException;
 import hu.cubix.hr.kolos.dto.EmployeeDto;
 import hu.cubix.hr.kolos.mapper.EmployeeMapper;
 import hu.cubix.hr.kolos.model.Employee;
+import hu.cubix.hr.kolos.repository.EmployeeRepository;
 import hu.cubix.hr.kolos.service.EmployeeService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -40,6 +42,10 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeMapper employeeMapper;
 	
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	
+	
 	@GetMapping
 	public List<EmployeeDto> findAll(@RequestParam Optional<Integer> minSalary){
 //		if(minSalary.isEmpty())
@@ -49,7 +55,7 @@ public class EmployeeController {
 		
 		List<Employee> employees = null;
 		if (minSalary.isPresent()) {
-			// employees = employeeRepository.findBySalaryGreaterThan(minSalary);
+			employees = employeeRepository.findBySalaryGreaterThan(minSalary.get());
 		} else {
 			employees = employeeService.findAll();
 		}
@@ -94,7 +100,7 @@ public class EmployeeController {
 //		employees.put(employee.getId(), employee);
 //		return ResponseEntity.ok(employee);
 //	}
-	public EmployeeDto create(@RequestBody EmployeeDto employeeDto) {
+	public EmployeeDto create(@RequestBody @Valid EmployeeDto employeeDto) {
 		return employeeMapper.employeeToDto(employeeService.save(employeeMapper.dtoToEmployee(employeeDto)));
 	}
 	
@@ -110,7 +116,7 @@ public class EmployeeController {
 //		employees.put(id, employee);
 //		return ResponseEntity.ok(employee);
 //	}
-	public ResponseEntity<EmployeeDto> update(@PathVariable long id, @RequestBody EmployeeDto employeeDto) {
+	public ResponseEntity<EmployeeDto> update(@PathVariable long id, @RequestBody @Valid EmployeeDto employeeDto) {
 		employeeDto.setId(id);
 		Employee updatedEmployee = employeeService.update(employeeMapper.dtoToEmployee(employeeDto));
 		if (updatedEmployee == null) {
