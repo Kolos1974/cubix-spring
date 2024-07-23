@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import hu.cubix.airport.service.AirportService;
+import hu.cubix.airport.service.InitDbService;
 import hu.cubix.airport.service.PriceService;
 
 @SpringBootApplication
@@ -18,6 +19,9 @@ public class AirportApplication implements CommandLineRunner{
 	
 	@Autowired
 	AirportService airportService;
+	
+	@Autowired
+	InitDbService initDbService;	
 	
 	
 	public static void main(String[] args) {
@@ -30,8 +34,7 @@ public class AirportApplication implements CommandLineRunner{
 		System.out.println(priceService.getFinalPrice(100));
 		System.out.println(priceService.getFinalPrice(2000));
 		// airportService.createFlight(1, 2, "ABC123", LocalDateTime.now());
-		
-		
+		initDbService.createUsersIfNeeded();
 	}
 
 }
