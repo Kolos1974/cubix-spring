@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 // import org.springframework.security.config.Customizer;
@@ -21,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
 	@Bean
@@ -58,9 +60,14 @@ public class SecurityConfig {
 				.csrf(
 						csrf -> csrf.disable()
 				)
-/*				
 				.authorizeHttpRequests(auth ->
 						auth
+						.requestMatchers( HttpMethod.POST, "/api/airports/**").hasAuthority("admin")
+						.requestMatchers( HttpMethod.PUT, "/api/airports/**").hasAnyAuthority("admin", "user")
+						.anyRequest().authenticated()
+						
+						
+/*						
 								.requestMatchers(HttpMethod.POST, "/api/login").permitAll()
 								.requestMatchers( HttpMethod.POST, "/api/addresses/**").hasAuthority("addressmanager")
 								.requestMatchers( HttpMethod.PUT, "/api/addresses/**").hasAuthority("addressmanager")
@@ -68,7 +75,9 @@ public class SecurityConfig {
 								.requestMatchers("/api/sections/**").authenticated()
 								.requestMatchers("/api/milestones/**").authenticated()
 								.requestMatchers( "/api/transportPlans/**").hasAuthority("transportplanmanager")
+*/								
 				)
+/*				
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 */				
 				.build();
