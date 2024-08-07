@@ -23,7 +23,9 @@ import org.springframework.web.server.ResponseStatusException;
 import hu.cubix.hr.kolos.dto.CompanyDto;
 import hu.cubix.hr.kolos.dto.EmployeeDto;
 import hu.cubix.hr.kolos.mapper.CompanyMapper;
+import hu.cubix.hr.kolos.model.AverageSalaryByPosition;
 import hu.cubix.hr.kolos.model.Company;
+import hu.cubix.hr.kolos.repository.CompanyRepository;
 import hu.cubix.hr.kolos.service.CompanyService;
 
 @RestController
@@ -36,7 +38,8 @@ public class CompanyController {
 	@Autowired
 	private CompanyMapper companyMapper;
 
-	
+	@Autowired
+	CompanyRepository companyRepository;
 	
 	private Map<Long, CompanyDto> companies = new HashMap<>();
 	
@@ -214,6 +217,38 @@ public class CompanyController {
 		Company company = companyService.replaceEmployees(id, companyMapper.dtosToEmployees(newEmployees));
 		return companyMapper.companyToDto(company);
 	}
+	
+	
+	
+	@GetMapping(params = "aboveSalary")
+	public List<CompanyDto> getCompaniesAboveSalary(@RequestParam int aboveSalary,
+			@RequestParam Optional<Boolean> full) {
+		List<Company> filteredCompanies = companyRepository.findByEmployeeWithSalaryHigherThan(aboveSalary);
+		return mapCompanies(filteredCompanies, full);
+	}
+
+	@GetMapping(params = "aboveEmployeeCount")
+	public List<CompanyDto> getCompaniesAboveEmployeeCount(@RequestParam int aboveEmployeeCount,
+			@RequestParam Optional<Boolean> full) {
+		List<Company> filteredCompanies = companyRepository.findByEmployeeCountHigherThan(aboveEmployeeCount);
+		return mapCompanies(filteredCompanies, full);
+	}
+
+	/*
+	@GetMapping("/{id}/salaryStats")
+	public List<AverageSalaryByPosition> getSalaryStatsById(@PathVariable long id) {
+		return companyRepository.findAverageSalariesByPosition(id);
+	}
+	*/
+
+	private List<CompanyDto> mapCompanies(List<Company> companies, Optional<Boolean> full) {
+		if (full.orElse(false)) {
+			return companyMapper.companiesToDtos(companies);
+		} else {
+			return companyMapper.companiesToSummaryDtos(companies);
+		}
+	}	
+	
 	
 	
 //	private CompanyDto getCompanyByIdOrThrow(long id) {

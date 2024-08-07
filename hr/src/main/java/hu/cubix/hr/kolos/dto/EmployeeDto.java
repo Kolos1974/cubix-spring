@@ -16,7 +16,9 @@ public class EmployeeDto {
 	private int salary;
 	@Past
 	private LocalDateTime dateOfStartWork;
-
+	
+	private CompanyDto company;
+	
 	public EmployeeDto() {
 
 	}
@@ -75,4 +77,14 @@ public class EmployeeDto {
 				+ dateOfStartWork + "]";
 	}
 
+	public CompanyDto getCompany() {
+		return company;
+	}
+
+	public void setCompany(CompanyDto company) {
+		this.company = company;
+	}
+
+	
+	
 }
