@@ -234,12 +234,10 @@ public class CompanyController {
 		return mapCompanies(filteredCompanies, full);
 	}
 
-	/*
 	@GetMapping("/{id}/salaryStats")
 	public List<AverageSalaryByPosition> getSalaryStatsById(@PathVariable long id) {
 		return companyRepository.findAverageSalariesByPosition(id);
 	}
-	*/
 
 	private List<CompanyDto> mapCompanies(List<Company> companies, Optional<Boolean> full) {
 		if (full.orElse(false)) {

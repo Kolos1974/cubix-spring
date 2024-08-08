@@ -38,6 +38,8 @@ public interface CompanyMapper {
 	@Mapping(target = "id", source = "employeeId")
 	@Mapping(target = "title", source = "jobTitle")
 	@Mapping(target = "dateOfStartWork", source = "dateOfStartWork")
+	// A kereszthivatkozás miatt kell kiiktatni az employee alatti company-t
+	@Mapping(target = "company", ignore=true)
 	EmployeeDto employeeToDto(Employee employee);
 
 	@InheritInverseConfiguration
