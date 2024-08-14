@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: logistic
+  datasource:
+    url: jdbc:postgresql://localhost:5432/logistic
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+logistic:
+  delay:
+    min30: 1
+    min60: 2
+    min120: 5
