@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import hu.cubix.hr.kolos.model.Employee;
 import hu.cubix.hr.kolos.service.EmployeeService;
+import hu.cubix.hr.kolos.service.InitDbService;
 import hu.cubix.hr.kolos.service.SalaryService;
 import hu.cubix.hr.kolos.service.SmartEmployeeService;
 
@@ -21,6 +22,9 @@ public class HrApplication implements CommandLineRunner {
 	
 	@Autowired
 	SalaryService salaryService;	
+	
+	@Autowired
+	InitDbService initDbService;
 	
 	
 	public static void main(String[] args) {
@@ -64,7 +68,7 @@ public class HrApplication implements CommandLineRunner {
 		System.out.println(emp3.getSalary());		
 		System.out.println(emp4.getSalary());		
 		
-		
+		initDbService.initDb();
 	}
 
 }
