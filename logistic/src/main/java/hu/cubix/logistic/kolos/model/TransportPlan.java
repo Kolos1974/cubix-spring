@@ -27,7 +27,19 @@ public class TransportPlan {
 	//	super();
 		this.expectedIn = expectedIn;
 	}
+	
+	
+	public long getTransportPlanId() {
+		return transportPlanId;
+	}
 
+	public void setTransportPlanId(long transportPlanId) {
+		this.transportPlanId = transportPlanId;
+	}
+	
+	
+	
+	
 	public double getExpectedIn() {
 		return expectedIn;
 	}
