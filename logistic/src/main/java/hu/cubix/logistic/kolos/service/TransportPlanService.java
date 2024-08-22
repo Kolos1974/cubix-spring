@@ -1,5 +1,7 @@
 package hu.cubix.logistic.kolos.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,11 @@ public class TransportPlanService {
 	public TransportPlan save(TransportPlan transportPlan) {
 
 		return transportPlanRepository.save(transportPlan);
+	}
+
+	
+	public List<TransportPlan> findAll() {
+		return transportPlanRepository.findAll();
 	}
 	
 }

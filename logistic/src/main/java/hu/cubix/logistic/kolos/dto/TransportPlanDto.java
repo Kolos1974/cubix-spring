@@ -30,10 +30,12 @@ public class TransportPlanDto {
 	}
 
 	// A mappelés miatt szükség van az Id getter/setter-re!! 
+	// Az integrációs teszt miatt is szükséges !!
 	public long getTransportPlanId() {
 		return transportPlanId;
 	}
 	
+	// Erre szükség van?
 	public void setTransportPlanId(long transportPlanId) {
 		this.transportPlanId = transportPlanId;
 	}

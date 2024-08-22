@@ -1,5 +1,7 @@
 package hu.cubix.logistic.kolos.mapper;
 
+import java.util.List;
+
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,4 +21,9 @@ public interface TransportPlanMapper {
 	@InheritInverseConfiguration
 	public TransportPlan dtoToTransportPlan(TransportPlanDto transportPlanDto);
 
+	
+	List<TransportPlanDto> transportPlansToDtos(List<TransportPlan> transportPlans);	
+	
+	
+	List<TransportPlan> dtosToTransportPlans(List<TransportPlanDto> transportPlan);
 }
