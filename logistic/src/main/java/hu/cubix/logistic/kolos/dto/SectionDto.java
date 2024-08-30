@@ -1,130 +1,85 @@
-package hu.cubix.logistic.kolos.model;
+package hu.cubix.logistic.kolos.dto;
 
-import java.util.Objects;
+import hu.cubix.logistic.kolos.model.Milestone;
+import hu.cubix.logistic.kolos.model.TransportPlan;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-
-@Entity
-public class Section {
+public class SectionDto {
 
 	
-	@Id
-    @GeneratedValue
 	private long sectionId;	
 	
-	@ManyToOne
+	@NotNull
 	private TransportPlan transportPlan;
 	
+	@Positive
 	private int orderNum;
 	
-	@ManyToOne
+	@NotNull
 	private Milestone startMileStone;
-	@ManyToOne
+	@NotNull
 	private Milestone endMilestone;
 	
 	
-	public Section() {
-	//	super();
+	public SectionDto() {
+		super();
 	}
 
-	
-	
-
-	public Section(TransportPlan transportPlan, int orderNum, Milestone startMileStone, Milestone endMilestone) {
-		// super();
+	public SectionDto(@NotNull TransportPlan transportPlan, @Positive int orderNum, @NotNull Milestone startMileStone,
+			@NotNull Milestone endMilestone) {
+		super();
 		this.transportPlan = transportPlan;
 		this.orderNum = orderNum;
 		this.startMileStone = startMileStone;
 		this.endMilestone = endMilestone;
 	}
-
-
-	/*
-	public Section(int orderNum, Milestone startMileStone, Milestone endMilestone) {
-		super();
-		this.orderNum = orderNum;
-		this.startMileStone = startMileStone;
-		this.endMilestone = endMilestone;
-	}
-	*/
-	
 
 	public long getSectionId() {
 		return sectionId;
 	}
 
-
 	public void setSectionId(long sectionId) {
 		this.sectionId = sectionId;
 	}
-
 
 	public TransportPlan getTransportPlan() {
 		return transportPlan;
 	}
 
-
 	public void setTransportPlan(TransportPlan transportPlan) {
 		this.transportPlan = transportPlan;
 	}
-
 
 	public int getOrderNum() {
 		return orderNum;
 	}
 
-
 	public void setOrderNum(int orderNum) {
 		this.orderNum = orderNum;
 	}
-
 
 	public Milestone getStartMileStone() {
 		return startMileStone;
 	}
 
-
 	public void setStartMileStone(Milestone startMileStone) {
 		this.startMileStone = startMileStone;
 	}
-
 
 	public Milestone getEndMilestone() {
 		return endMilestone;
 	}
 
-
 	public void setEndMilestone(Milestone endMilestone) {
 		this.endMilestone = endMilestone;
 	}
 
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(sectionId);
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Section other = (Section) obj;
-		return sectionId == other.sectionId;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Section [sectionId=" + sectionId + ", transportPlan=" + transportPlan + ", orderNum=" + orderNum
+		return "SectionDto [sectionId=" + sectionId + ", transportPlan=" + transportPlan + ", orderNum=" + orderNum
 				+ ", startMileStone=" + startMileStone + ", endMilestone=" + endMilestone + "]";
 	}
+	
 	
 }
