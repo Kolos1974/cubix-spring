@@ -17,7 +17,8 @@ public interface EmployeeMapper {
 
 	
 	@Mapping(target = "id", source = "employeeId")
-	@Mapping(target = "title", source = "jobTitle")
+	//@Mapping(target = "title", source = "jobTitle")
+	@Mapping(target = "title", source = "position.name")
 	@Mapping(target = "dateOfStartWork", source = "dateOfStartWork")
 	// A kereszthivatkozás miatt kell kiiktatni a company alatti employee-t
 	@Mapping(target = "company.employees", ignore=true)

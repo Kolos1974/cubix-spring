@@ -36,7 +36,8 @@ public interface CompanyMapper {
 	// Itt is szerepel a dto-ra való konvertálás.
 	// Azért van ez a duplikáció, mert lehet, hogy itt máshogy akarnánk a konvertálást elvégezni. 
 	@Mapping(target = "id", source = "employeeId")
-	@Mapping(target = "title", source = "jobTitle")
+	//@Mapping(target = "title", source = "jobTitle")
+	@Mapping(target = "title", source = "position.name")
 	@Mapping(target = "dateOfStartWork", source = "dateOfStartWork")
 	// A kereszthivatkozás miatt kell kiiktatni az employee alatti company-t
 	@Mapping(target = "company", ignore=true)

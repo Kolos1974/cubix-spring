@@ -19,10 +19,18 @@ public class EmployeeTLController {
 	private List<Employee> allEmployees = new ArrayList<>();
 
 	{
+		/*
 		allEmployees
 				.add(new Employee(1L, "Kis Gábor", "osztályvezető", 100000, LocalDateTime.of(2012, 1, 1, 8, 0, 0)));
 		allEmployees
 				.add(new Employee(2L, "Papp Ignác", "igazgató", 500000, LocalDateTime.of(2014, 5, 6, 8, 0, 0)));
+		*/
+		
+		allEmployees
+		.add(new Employee(1L, "Kis Gábor",  100000, LocalDateTime.of(2012, 1, 1, 8, 0, 0)));
+		allEmployees
+		.add(new Employee(2L, "Papp Ignác",  500000, LocalDateTime.of(2014, 5, 6, 8, 0, 0)));
+		
 	}
 
 	
