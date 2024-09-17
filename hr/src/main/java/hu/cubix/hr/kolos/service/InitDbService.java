@@ -13,6 +13,7 @@ import hu.cubix.hr.kolos.model.PositionDetailsByCompany;
 import hu.cubix.hr.kolos.model.Qualification;
 import hu.cubix.hr.kolos.repository.CompanyRepository;
 import hu.cubix.hr.kolos.repository.EmployeeRepository;
+import hu.cubix.hr.kolos.repository.HolidayRequestRepository;
 import hu.cubix.hr.kolos.repository.PositionDetailsByCompanyRepository;
 import hu.cubix.hr.kolos.repository.PositionRepository;
 
@@ -31,6 +32,17 @@ public class InitDbService {
 
 	@Autowired
 	PositionDetailsByCompanyRepository positionDetailsByCompanyRepository;
+	
+	@Autowired
+	HolidayRequestRepository holidayRequestRepository;
+	
+	public void clearDb() {
+		positionDetailsByCompanyRepository.deleteAllInBatch();
+		holidayRequestRepository.deleteAllInBatch();
+		employeeRepository.deleteAllInBatch();
+		positionRepository.deleteAllInBatch();
+		companyRepository.deleteAllInBatch();
+	}
 
 	@Transactional
 	public void initDb() {

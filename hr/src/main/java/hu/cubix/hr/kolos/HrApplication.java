@@ -111,7 +111,7 @@ public class HrApplication implements CommandLineRunner {
 			System.out.format("1 nappal a %.2f éves határ után az új fizetés %d%n", limit, e2.getSalary());
 		}
 		*/
-		// initDbService.clearDb();
+		initDbService.clearDb();
 		
 		
 		initDbService.initDb();

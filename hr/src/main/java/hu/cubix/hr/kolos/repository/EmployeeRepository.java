@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import hu.cubix.hr.kolos.model.Employee;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Long>{
+// public interface EmployeeRepository extends JpaRepository<Employee, Long>{
+public interface EmployeeRepository extends JpaRepository<Employee, Long>, JpaSpecificationExecutor<Employee> {
 
 	// A metódusnévből ki tudja találni, hogy milyen query-t kell készítenie!!
 	List<Employee> findBySalaryGreaterThan(Integer minSalary);

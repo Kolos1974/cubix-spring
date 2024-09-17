@@ -146,4 +146,9 @@ public class EmployeeController {
 	}
 	
 	
+	@PostMapping("/search")
+	public List<EmployeeDto> findByExample(@RequestBody EmployeeDto example) {
+		return employeeMapper.employeesToDtos(employeeService.findEmployeesByExample(employeeMapper.dtoToEmployee(example)));
+	}
+	
 }

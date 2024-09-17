@@ -20,4 +20,6 @@ public interface EmployeeService {
 
 	public int getPayRaisePercent(Employee employee);
 	
+	public List<Employee> findEmployeesByExample(Employee employee);
+	
 }
